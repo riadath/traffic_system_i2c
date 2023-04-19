@@ -15,7 +15,7 @@
     USER INPUT
 *********************/
 
-static char input_buff[50];
+static char input_buff[50],recv_buff[50];
 void USART2_IRQHandler(void);
 void getString(void);
 void sendString(char *str);
@@ -36,33 +36,35 @@ void USART2_IRQHandler(void){
     USART2->CR1 |= (USART_CR1_RXNEIE);
 }
 
-void sendString(char *str){
-    UART_SendString(USART2,str);
-}
-
 
 
 int main(void)
 {   
-		
+	uint8_t i = 0;
+    uint8_t rcv_ptr;
+
 	/*	Configuration */
 	initClock();
 	sysInit();
 	UART2_Config();
+    I2C1_Config(i);
+    
     NVIC_SetPriority(USART2_IRQn, 1);
     NVIC_EnableIRQ(USART2_IRQn);
+    strcpy(input_buff,"iamademigod");
+    if (i == 1){
+        I2C1_WriteData(input_buff,strlen(input_buff));
+    }
+    else{
+        I2C1_Read(&rcv_ptr,strlen(input_buff));
+        
+        sendString("Data Read : ");
+        char *rcv_str = (char *)&rcv_ptr;
+        sendString(rcv_str);
+        sendString(" <<<::: end slave receive\n");
+        
+    }
     
-		
-	while(1){
-		
-		ms_delay(2000);
-		
-		if(strlen(input_buff) != 0){
-			UART_SendString(USART2,input_buff);
-			strcpy(input_buff,"");
-		}
-		
-        sendString("hello running<<<<\n");
-	}
+    
 }
 

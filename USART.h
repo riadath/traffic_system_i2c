@@ -45,7 +45,7 @@ void UART_GetString(USART_TypeDef *,uint16_t,uint8_t*);
 void _USART_WRITE(USART_TypeDef*,uint8_t*);
 uint8_t _USART_READ(USART_TypeDef*,uint8_t *,uint16_t);
 uint8_t _USART_READ_STR(USART_TypeDef*,uint8_t *,uint16_t);
-
+void sendString(char *str);
 // USART 2 Configuration
 void UART2_Config(void);
 void UART4_Config(void);

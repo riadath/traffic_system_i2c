@@ -16,11 +16,14 @@ extern "C"{
 
 #include <stdint.h>
 #include "stm32f4xx.h"
-void I2C1_Config (void);
+
+void I2C1_Config (uint8_t mode);
 
 void I2C1_Start (void);
 
 void I2C1_Write (uint8_t data);
+
+void I2C1_WriteData(char *buffer, uint8_t size);
 
 void I2C1_Address (uint8_t Address);
 

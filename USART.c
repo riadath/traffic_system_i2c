@@ -100,6 +100,9 @@ void UART_GetString(USART_TypeDef *uart,uint16_t size,uint8_t* buff)
 	buff[i]='\0';
 		
 }
+void sendString(char *str){
+    UART_SendString(USART2,str);
+}
 
 
 

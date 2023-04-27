@@ -356,7 +356,7 @@ void mainLoop(void){
 
 int main(void)
 {   
-	uint8_t i = 1;
+	uint8_t i = 0;
     I2C1_Config(i);
     
 //    gpio_config.Pin = GPIO_PIN_5;

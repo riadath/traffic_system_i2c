@@ -65,7 +65,7 @@ void I2C1_Start(void){
     I2C1->CR1 |= I2C_CR1_START;
     TIM3->CNT = 0;
     while(!(I2C1->SR1 & I2C_SR1_SB)){
-        if(TIM3->CNT > 1000){
+        if(TIM3->CNT > 200){
             sendString("Timeout\n");
             break;
         }
@@ -80,10 +80,9 @@ void I2C1_Stop(void){
 void I2C1_Address(uint8_t address){
     I2C1->DR = (uint8_t)(address << 1);
     TIM3->CNT = 0;
+    
     while(!(I2C1->SR1 & I2C_SR1_ADDR)){
-        
-        if(TIM3->CNT > 1000){
-            sendString("Timeout\n");
+        if(TIM3->CNT > 200){
             break;
         }
         
@@ -104,8 +103,7 @@ void I2C1_SetAddress(uint8_t address){
 void I2C1_Write(uint8_t data){
     TIM3->CNT = 0;
     while(!(I2C1->SR1 & I2C_SR1_TXE)){
-        if(TIM3->CNT > 1000){
-            sendString("Timeout\n");
+        if(TIM3->CNT > 200){
             break;
         }
     }
@@ -113,8 +111,7 @@ void I2C1_Write(uint8_t data){
     
     TIM3->CNT = 0;
     while(!(I2C1->SR1 & I2C_SR1_BTF)){
-        if(TIM3->CNT > 1000){
-            sendString("Timeout\n");
+        if(TIM3->CNT > 200){
             break;
         }
     }

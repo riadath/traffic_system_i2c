@@ -20,6 +20,7 @@ void I2C1_Config(uint8_t mode){
     
     I2C1->CR1 |= I2C_CR1_SWRST;
     I2C1->CR1 &= ~I2C_CR1_SWRST;
+    
     //master mode config
     /*
         Fpcklk1 = 45 mhz
@@ -33,17 +34,26 @@ void I2C1_Config(uint8_t mode){
         Trise = 46
         
     */
+    
     I2C1->CR2 |= (45 << I2C_CR2_FREQ_Pos);
     I2C1->CCR = 225 << I2C_CCR_CCR_Pos;
     I2C1->TRISE = 46 << I2C_TRISE_TRISE_Pos;
+
+    I2C1->CR1 |= I2C_CR1_PE;
+    I2C1->CR1 &= ~I2C_CR1_POS;
     
     if(mode == 0){
+        /*Set Address and Enable Interrupts for Slave Receieve*/
         I2C1_SetAddress(0);
+        I2C1->CR2 |= I2C_CR2_ITEVTEN; /*Enable Event Interrupt*/
+//        I2C1->CR2 |= I2C_CR2_ITERREN; /*Enable Error Interrupt*/
+//        I2C1->CR2 |= I2C_CR2_ITBUFEN; /*Enable Buffer Interrupt*/
+        NVIC_SetPriority(I2C1_EV_IRQn,0);
+        NVIC_EnableIRQ(I2C1_EV_IRQn);  
     }
 }
 
 void I2C1_Start(void){
-//    I2C1->CR1 |= I2C_CR1_ACK;
     I2C1->CR1 |= I2C_CR1_START;
     while(!(I2C1->SR1 & I2C_SR1_SB));
 }
@@ -72,101 +82,31 @@ void I2C1_Write(uint8_t data){
     while(!(I2C1->SR1 & I2C_SR1_BTF));
 }
 
-void I2C1_WriteData(char *buffer, uint8_t size){
-    uint8_t idx = 0;
-    //DEBUG <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-    
-    sendString(buffer);
-    sendString(" << Data to send\n");
-    
-    //enable peripheral
-    I2C1->CR1 |= I2C_CR1_PE;
-    
-    //disable pos
-    I2C1->CR1 &= ~I2C_CR1_POS;
-    
-    //generate start
-    I2C1_Start();
-    
-    //send address
-    I2C1_Address(0);
-    
-    //DEBUG <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-    sendString("Address Sent\n");
-    
-    for(idx = 0;idx < size;idx++){
-        I2C1_Write(buffer[idx]);
-    }
-    //DEBUG <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-    sendString("Data Sent\n");
-    
-    //generate stop
-    I2C1_Stop();
 
-    //DEBUG <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-    sendString("end master tranmit\n");
+/*read and write functions*/
+void I2C1_TransmitMaster(char *buffer, uint32_t size){
+    I2C1_Start();    /* generate start */
+    I2C1_Address(0); /* send address */
+    for(int idx = 0;idx < (int)size;idx++)I2C1_Write(buffer[idx]);/* send data */
+    I2C1_Stop();  /* generate stop */
 }
 
-void I2C1_Read(uint8_t *buffer, uint8_t size){
-    
-    uint32_t idx = 0,temp_read;
-    sendString("inside read\n");
-    
-    //peripheral enable
-    I2C1->CR1 |= I2C_CR1_PE;
-    
-    //disable pos
-    I2C1->CR1 &= ~I2C_CR1_POS;
-    
-    //enable ack
-    I2C1->CR1 |= I2C_CR1_ACK;
-    
-    //wait for address to set
-    while(!(I2C1->SR1 & I2C_SR1_ADDR));
-    //clear address flag
-    temp_read = I2C1->SR1 | I2C1->SR2;
-    
-    //DEBUG <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-    sendString("address matched\n");
-    
+void I2C1_ReceiveSlave(uint8_t *buffer, uint32_t size){
+    uint32_t idx = 0,temp_read = 0;
+//    I2C1->CR1 |= I2C_CR1_ACK; /*Enable ACK*/
+    while(!(I2C1->SR1 & I2C_SR1_ADDR)); /*wait for address to set*/
+    temp_read = I2C1->SR1 | I2C1->SR2; /*clear address flag*/
     for(idx = 0;idx < size;idx++){
-        //wait for rxne to set
-        while(!(I2C1->SR1 & I2C_SR1_RXNE));
-        //read data from DR register
-        buffer[idx] = (uint8_t)I2C1->DR;
+        while(!(I2C1->SR1 & I2C_SR1_RXNE)); /*wait for rxne to set*/
+        buffer[idx] = (uint8_t)I2C1->DR;/*read data from DR register*/
     }
-    
     buffer[idx] = '\0';
-    
-    
-    
-//    if (I2C1->SR1 & I2C_SR1_BTF){
-//        buffer[idx] = (uint8_t)I2C1->DR;
-//        
-//        //DEBUG <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-//        sendString("data read (btf) : ");
-//        UART_SendChar(USART2,buffer[idx]);
-//        sendString(" <<\n");
-//    }
-    
-    
-    //DEBUG <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-    sendString("data received\n");
-    
-    
-    //wait for stopf to set
-    while(!(I2C1->SR1 & I2C_SR1_STOPF));
-    //clear stop flag
-    temp_read = I2C1->SR1;
+    while(!(I2C1->SR1 & I2C_SR1_STOPF)); /*wait for stopf to set*/
+    /*clear stop flag*/
+    temp_read = I2C1->SR1; 
     I2C1->CR1 |= I2C_CR1_PE;
     
-    //disable ack
-    I2C1->CR1 &= ~I2C_CR1_ACK;
-    
-    
-    //DEBUG <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-    sendString("read end\n");
-
+    I2C1->CR1 &= ~I2C_CR1_ACK; /*disable ack*/
 }
 
 

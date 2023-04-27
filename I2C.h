@@ -23,7 +23,7 @@ void I2C1_Start (void);
 
 void I2C1_Write (uint8_t data);
 
-void I2C1_WriteData(char *buffer, uint8_t size);
+void I2C1_TransmitMaster(char *buffer, uint32_t size);
 
 void I2C1_Address (uint8_t Address);
 
@@ -31,7 +31,7 @@ void I2C1_Stop (void);
 
 void I2C1_SetAddress(uint8_t address);
 
-void I2C1_Read (uint8_t *buffer, uint8_t size);
+void I2C1_ReceiveSlave(uint8_t *buffer, uint32_t size);
 
 #ifdef __cplusplus
 }

@@ -98,17 +98,23 @@ void I2C1_TransmitMaster(char *buffer, uint32_t size){
 
 
 
-char* I2C1_ReceiveSlave(uint8_t *buffer, uint32_t size){
-    uint32_t idx = 0;
+
+
+char* I2C1_ReceiveSlave(uint8_t *buffer){
+    uint32_t idx = 0,size = 0;
+    uint8_t ch = 0;
     char ret[100];
-    
-//    I2C1->CR1 |= I2C_CR1_ACK; /*Enable ACK*/
+
     while(!(I2C1->SR1 & I2C_SR1_ADDR)); /*wait for address to set*/
     idx = I2C1->SR1 | I2C1->SR2; /*clear address flag*/
     
-    for(idx = 0;idx < size;idx++){
+    idx = 0;
+    while(ch != '@'){
         while(!(I2C1->SR1 & I2C_SR1_RXNE)); /*wait for rxne to set*/
-        buffer[idx] = (uint8_t)I2C1->DR;/*read data from DR register*/
+        ch = (uint8_t)I2C1->DR;/*read data from DR register*/
+        if(ch == '@')break;
+        buffer[idx++] = ch;
+        size++;
     }
     buffer[idx] = '\0';
     
@@ -124,10 +130,6 @@ char* I2C1_ReceiveSlave(uint8_t *buffer, uint32_t size){
         ret[idx] = buffer[idx];
     }ret[idx] = '\0';
     
-//    sendString("gotem :::");
-//    sendString(ret);
-//    sendString(" <<<<\n");
-//    
     return ret;
 }
 

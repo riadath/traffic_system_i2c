@@ -3,6 +3,7 @@
 #include "USART.h"
 #include "SYS_INIT.h"
 #include <stdio.h>
+#include <stdlib.h>
 
 void I2C1_Config(uint8_t mode){
     //Enable I2C and GPIO
@@ -91,22 +92,36 @@ void I2C1_TransmitMaster(char *buffer, uint32_t size){
     I2C1_Stop();  /* generate stop */
 }
 
-void I2C1_ReceiveSlave(uint8_t *buffer, uint32_t size){
+
+
+
+char* I2C1_ReceiveSlave(uint8_t *buffer, uint32_t size){
     uint32_t idx = 0,temp_read = 0;
+    char *ret = (char*)malloc(100*sizeof(char));
+    
 //    I2C1->CR1 |= I2C_CR1_ACK; /*Enable ACK*/
     while(!(I2C1->SR1 & I2C_SR1_ADDR)); /*wait for address to set*/
     temp_read = I2C1->SR1 | I2C1->SR2; /*clear address flag*/
+    
     for(idx = 0;idx < size;idx++){
         while(!(I2C1->SR1 & I2C_SR1_RXNE)); /*wait for rxne to set*/
         buffer[idx] = (uint8_t)I2C1->DR;/*read data from DR register*/
     }
     buffer[idx] = '\0';
+    
     while(!(I2C1->SR1 & I2C_SR1_STOPF)); /*wait for stopf to set*/
     /*clear stop flag*/
     temp_read = I2C1->SR1; 
     I2C1->CR1 |= I2C_CR1_PE;
     
     I2C1->CR1 &= ~I2C_CR1_ACK; /*disable ack*/
+    
+    
+    for(idx = 0;idx < size;idx++){
+        ret[idx] = buffer[idx];
+    }ret[idx] = '\0';
+    
+    return ret;
 }
 
 

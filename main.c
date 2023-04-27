@@ -40,31 +40,38 @@ void USART2_IRQHandler(void){
     USART2->CR1 |= (USART_CR1_RXNEIE);
 }
 
+
 void I2C1_EV_IRQHandler(void){ 
-        
-    I2C1->CR1 &= ~I2C_CR2_ITEVTEN;
-
+    
+    NVIC_DisableIRQ(I2C1_EV_IRQn);
     if(I2C1->SR1 & I2C_SR1_ADDR)
-        I2C1_ReceiveSlave(&rcv_ptr,(uint32_t)5);     
+        rcv_str = I2C1_ReceiveSlave(&rcv_ptr,(uint32_t)7);     
 
-    rcv_str = (char *)&rcv_ptr;
+    //rcv_str = (char *)&rcv_ptr;
+    if(strlen(rcv_str) != 0){
+        strcpy(input_buff,rcv_str);
+    }
     
-    sendString("Data Read ::: ");
-    sendString(rcv_str);
-    sendString("  ::: end slave receive\n");
     
-    I2C1->CR2 |= I2C_CR2_ITEVTEN;
+    if(strlen(input_buff) != 0){
+            sendString("RCV :::");
+            sendString(input_buff);
+            sendString(":::\n");
+            strcpy(input_buff,"");
+        }
+    NVIC_EnableIRQ(I2C1_EV_IRQn);
 }
 
 void inf_read_loop(void){
     sendString("Inside Read Loop\n");
-    
+    strcpy(input_buff,"");
     while(1){   
         I2C1->CR1 |= I2C_CR1_ACK;
         GPIO_WritePin(GPIOA,5,GPIO_PIN_SET);
         ms_delay(1000);
         GPIO_WritePin(GPIOA,5,GPIO_PIN_RESET);
         ms_delay(1000);
+
     }
 }
 
@@ -83,10 +90,6 @@ int main(void)
 	sysInit();
 	UART2_Config();
     I2C1_Config(i);
-    
-    
-    
-    
     
     strcpy(input_buff,"");
     sendString("HELLO I'M IN\n");

@@ -31,7 +31,7 @@ void I2C1_Stop (void);
 
 void I2C1_SetAddress(uint8_t address);
 
-void I2C1_ReceiveSlave(uint8_t *buffer, uint32_t size);
+char* I2C1_ReceiveSlave(uint8_t *buffer, uint32_t size);
 
 #ifdef __cplusplus
 }

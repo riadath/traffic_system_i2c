@@ -27,17 +27,14 @@ Project File Date:  04/12/2023
 <h2>Output:</h2>
 *** Using Compiler 'V6.19', folder: 'C:\Keil_v5\ARM\ARMCLANG\Bin'
 Build target 'Target 1'
-main.c(147): warning: mixing declarations and code is incompatible with standards before C99 [-Wdeclaration-after-statement]
-        char command[50],c1,c2,c3;
-             ^
-main.c(304): warning: function 'mainLoop' could be declared with attribute 'noreturn' [-Wmissing-noreturn]
-void mainLoop(void){
-                   ^
-2 warnings generated.
-compiling main.c...
+I2C.c(160): warning: address of stack memory associated with local variable 'ret' returned [-Wreturn-stack-address]
+    return ret;
+           ^~~
+1 warning generated.
+compiling I2C.c...
 linking...
-Program Size: Code=19524 RO-data=1540 RW-data=32 ZI-data=2584  
-".\Objects\i2c.axf" - 0 Error(s), 2 Warning(s).
+Program Size: Code=19652 RO-data=1500 RW-data=32 ZI-data=2584  
+".\Objects\i2c.axf" - 0 Error(s), 1 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -68,7 +65,7 @@ Package Vendor: Keil
       Include file:  Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h
       Source file:   Drivers/CMSIS/Device/ST/STM32F4xx/Source/Templates/arm/startup_stm32f446xx.s
       Source file:   Drivers/CMSIS/Device/ST/STM32F4xx/Source/Templates/system_stm32f4xx.c
-Build Time Elapsed:  00:00:01
+Build Time Elapsed:  00:00:00
 </pre>
 </body>
 </html>

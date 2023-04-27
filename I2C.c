@@ -4,6 +4,7 @@
 #include "SYS_INIT.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 void I2C1_Config(uint8_t mode){
     //Enable I2C and GPIO
@@ -46,10 +47,12 @@ void I2C1_Config(uint8_t mode){
     if(mode == 0){
         /*Set Address and Enable Interrupts for Slave Receieve*/
         I2C1_SetAddress(0);
+        
         I2C1->CR2 |= I2C_CR2_ITEVTEN; /*Enable Event Interrupt*/
-//        I2C1->CR2 |= I2C_CR2_ITERREN; /*Enable Error Interrupt*/
-//        I2C1->CR2 |= I2C_CR2_ITBUFEN; /*Enable Buffer Interrupt*/
-        NVIC_SetPriority(I2C1_EV_IRQn,0);
+        I2C1->CR2 |= I2C_CR2_ITERREN; /*Enable Error Interrupt*/
+        I2C1->CR2 |= I2C_CR2_ITBUFEN; /*Enable Buffer Interrupt*/
+        
+       
         NVIC_EnableIRQ(I2C1_EV_IRQn);  
     }
 }
@@ -96,12 +99,12 @@ void I2C1_TransmitMaster(char *buffer, uint32_t size){
 
 
 char* I2C1_ReceiveSlave(uint8_t *buffer, uint32_t size){
-    uint32_t idx = 0,temp_read = 0;
-    char *ret = (char*)malloc(100*sizeof(char));
+    uint32_t idx = 0;
+    char ret[100];
     
 //    I2C1->CR1 |= I2C_CR1_ACK; /*Enable ACK*/
     while(!(I2C1->SR1 & I2C_SR1_ADDR)); /*wait for address to set*/
-    temp_read = I2C1->SR1 | I2C1->SR2; /*clear address flag*/
+    idx = I2C1->SR1 | I2C1->SR2; /*clear address flag*/
     
     for(idx = 0;idx < size;idx++){
         while(!(I2C1->SR1 & I2C_SR1_RXNE)); /*wait for rxne to set*/
@@ -111,7 +114,7 @@ char* I2C1_ReceiveSlave(uint8_t *buffer, uint32_t size){
     
     while(!(I2C1->SR1 & I2C_SR1_STOPF)); /*wait for stopf to set*/
     /*clear stop flag*/
-    temp_read = I2C1->SR1; 
+    idx = I2C1->SR1; 
     I2C1->CR1 |= I2C_CR1_PE;
     
     I2C1->CR1 &= ~I2C_CR1_ACK; /*disable ack*/
@@ -121,6 +124,10 @@ char* I2C1_ReceiveSlave(uint8_t *buffer, uint32_t size){
         ret[idx] = buffer[idx];
     }ret[idx] = '\0';
     
+//    sendString("gotem :::");
+//    sendString(ret);
+//    sendString(" <<<<\n");
+//    
     return ret;
 }
 

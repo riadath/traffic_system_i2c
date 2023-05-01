@@ -1,13 +1,4 @@
-/**
-  ****************************************
 
-  I2C Setup For STM32F446RE
-  Author:   ControllersTech
-  Updated:  31st Jan 2020
-
-  *****************************************
-  Copyright (C) 2017 ControllersTech.com
-*/
 #ifndef __I2C_H
 #define __I2C_H
 #ifdef __cplusplus

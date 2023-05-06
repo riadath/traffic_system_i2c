@@ -1097,14 +1097,14 @@ Image Symbol Table
     [Anonymous Symbol]                       0x08003468   Section        0  clock.o(.text.initClock)
     [Anonymous Symbol]                       0x08003540   Section        0  main.o(.text.main)
     [Anonymous Symbol]                       0x08003610   Section        0  main.o(.text.mainLoop)
-    [Anonymous Symbol]                       0x0800380c   Section        0  traffic_system.o(.text.parseCommand)
-    [Anonymous Symbol]                       0x08003924   Section        0  usart.o(.text.sendString)
-    [Anonymous Symbol]                       0x0800393c   Section        0  traffic_system.o(.text.setDelayTraffic)
-    [Anonymous Symbol]                       0x080039f8   Section        0  traffic_system.o(.text.showReportIntervalConfig)
-    [Anonymous Symbol]                       0x08003a38   Section        0  traffic_system.o(.text.showTrafficConfig)
-    [Anonymous Symbol]                       0x08003aec   Section        0  traffic_system.o(.text.show_traffic_info)
-    [Anonymous Symbol]                       0x08003cf0   Section        0  sys_init.o(.text.sysInit)
-    [Anonymous Symbol]                       0x08003d00   Section        0  main.o(.text.tim5_delay)
+    [Anonymous Symbol]                       0x080037fc   Section        0  traffic_system.o(.text.parseCommand)
+    [Anonymous Symbol]                       0x08003914   Section        0  usart.o(.text.sendString)
+    [Anonymous Symbol]                       0x0800392c   Section        0  traffic_system.o(.text.setDelayTraffic)
+    [Anonymous Symbol]                       0x080039e8   Section        0  traffic_system.o(.text.showReportIntervalConfig)
+    [Anonymous Symbol]                       0x08003a28   Section        0  traffic_system.o(.text.showTrafficConfig)
+    [Anonymous Symbol]                       0x08003adc   Section        0  traffic_system.o(.text.show_traffic_info)
+    [Anonymous Symbol]                       0x08003ce0   Section        0  sys_init.o(.text.sysInit)
+    [Anonymous Symbol]                       0x08003cf0   Section        0  main.o(.text.tim5_delay)
     CL$$btod_d2e                             0x08003d8c   Section       62  btod.o(CL$$btod_d2e)
     CL$$btod_d2e_denorm_low                  0x08003dca   Section       70  btod.o(CL$$btod_d2e_denorm_low)
     CL$$btod_d2e_norm_op1                    0x08003e10   Section       96  btod.o(CL$$btod_d2e_norm_op1)
@@ -1614,15 +1614,15 @@ Image Symbol Table
     init                                     0x080033fd   Thumb Code   108  main.o(.text.init)
     initClock                                0x08003469   Thumb Code   214  clock.o(.text.initClock)
     main                                     0x08003541   Thumb Code   206  main.o(.text.main)
-    mainLoop                                 0x08003611   Thumb Code   508  main.o(.text.mainLoop)
-    parseCommand                             0x0800380d   Thumb Code   278  traffic_system.o(.text.parseCommand)
-    sendString                               0x08003925   Thumb Code    24  usart.o(.text.sendString)
-    setDelayTraffic                          0x0800393d   Thumb Code   188  traffic_system.o(.text.setDelayTraffic)
-    showReportIntervalConfig                 0x080039f9   Thumb Code    64  traffic_system.o(.text.showReportIntervalConfig)
-    showTrafficConfig                        0x08003a39   Thumb Code   178  traffic_system.o(.text.showTrafficConfig)
-    show_traffic_info                        0x08003aed   Thumb Code   516  traffic_system.o(.text.show_traffic_info)
-    sysInit                                  0x08003cf1   Thumb Code    16  sys_init.o(.text.sysInit)
-    tim5_delay                               0x08003d01   Thumb Code   140  main.o(.text.tim5_delay)
+    mainLoop                                 0x08003611   Thumb Code   492  main.o(.text.mainLoop)
+    parseCommand                             0x080037fd   Thumb Code   278  traffic_system.o(.text.parseCommand)
+    sendString                               0x08003915   Thumb Code    24  usart.o(.text.sendString)
+    setDelayTraffic                          0x0800392d   Thumb Code   188  traffic_system.o(.text.setDelayTraffic)
+    showReportIntervalConfig                 0x080039e9   Thumb Code    64  traffic_system.o(.text.showReportIntervalConfig)
+    showTrafficConfig                        0x08003a29   Thumb Code   178  traffic_system.o(.text.showTrafficConfig)
+    show_traffic_info                        0x08003add   Thumb Code   516  traffic_system.o(.text.show_traffic_info)
+    sysInit                                  0x08003ce1   Thumb Code    16  sys_init.o(.text.sysInit)
+    tim5_delay                               0x08003cf1   Thumb Code   156  main.o(.text.tim5_delay)
     _btod_d2e                                0x08003d8d   Thumb Code    62  btod.o(CL$$btod_d2e)
     _d2e_denorm_low                          0x08003dcb   Thumb Code    70  btod.o(CL$$btod_d2e_denorm_low)
     _d2e_norm_op1                            0x08003e11   Thumb Code    96  btod.o(CL$$btod_d2e_norm_op1)
@@ -1887,17 +1887,17 @@ Memory Map of the image
     0x0800353e   0x0800353e   0x00000002   PAD
     0x08003540   0x08003540   0x000000ce   Code   RO           20    .text.main          main.o
     0x0800360e   0x0800360e   0x00000002   PAD
-    0x08003610   0x08003610   0x000001fc   Code   RO           18    .text.mainLoop      main.o
-    0x0800380c   0x0800380c   0x00000116   Code   RO          158    .text.parseCommand  traffic_system.o
-    0x08003922   0x08003922   0x00000002   PAD
-    0x08003924   0x08003924   0x00000018   Code   RO          105    .text.sendString    usart.o
-    0x0800393c   0x0800393c   0x000000bc   Code   RO          150    .text.setDelayTraffic  traffic_system.o
-    0x080039f8   0x080039f8   0x00000040   Code   RO          154    .text.showReportIntervalConfig  traffic_system.o
-    0x08003a38   0x08003a38   0x000000b2   Code   RO          152    .text.showTrafficConfig  traffic_system.o
-    0x08003aea   0x08003aea   0x00000002   PAD
-    0x08003aec   0x08003aec   0x00000204   Code   RO          156    .text.show_traffic_info  traffic_system.o
-    0x08003cf0   0x08003cf0   0x00000010   Code   RO           73    .text.sysInit       sys_init.o
-    0x08003d00   0x08003d00   0x0000008c   Code   RO            8    .text.tim5_delay    main.o
+    0x08003610   0x08003610   0x000001ec   Code   RO           18    .text.mainLoop      main.o
+    0x080037fc   0x080037fc   0x00000116   Code   RO          158    .text.parseCommand  traffic_system.o
+    0x08003912   0x08003912   0x00000002   PAD
+    0x08003914   0x08003914   0x00000018   Code   RO          105    .text.sendString    usart.o
+    0x0800392c   0x0800392c   0x000000bc   Code   RO          150    .text.setDelayTraffic  traffic_system.o
+    0x080039e8   0x080039e8   0x00000040   Code   RO          154    .text.showReportIntervalConfig  traffic_system.o
+    0x08003a28   0x08003a28   0x000000b2   Code   RO          152    .text.showTrafficConfig  traffic_system.o
+    0x08003ada   0x08003ada   0x00000002   PAD
+    0x08003adc   0x08003adc   0x00000204   Code   RO          156    .text.show_traffic_info  traffic_system.o
+    0x08003ce0   0x08003ce0   0x00000010   Code   RO           73    .text.sysInit       sys_init.o
+    0x08003cf0   0x08003cf0   0x0000009c   Code   RO            8    .text.tim5_delay    main.o
     0x08003d8c   0x08003d8c   0x0000003e   Code   RO          463    CL$$btod_d2e        c_w.l(btod.o)
     0x08003dca   0x08003dca   0x00000046   Code   RO          465    CL$$btod_d2e_denorm_low  c_w.l(btod.o)
     0x08003e10   0x08003e10   0x00000060   Code   RO          464    CL$$btod_d2e_norm_op1  c_w.l(btod.o)
@@ -2023,8 +2023,8 @@ Image component sizes
 
        214          0          0          0          0       1792   clock.o
        352          0          0          0          0       2690   gpio.o
-      1008          0          9          0          0       6470   i2c.o
-      1512          0         82         28        115       5121   main.o
+      1008          0          9          0          0       6471   i2c.o
+      1512          0         82         28        115       5114   main.o
         64         26        452          0       1536        908   startup_stm32f446xx.o
        180          0          0          0          4       4673   sys_init.o
         18          0          0          0          0       2753   system_stm32f4xx.o
@@ -2032,7 +2032,7 @@ Image component sizes
        434          0          0          0          0       7061   usart.o
 
     ----------------------------------------------------------------------
-      5112         26        980         52       2260      35364   Object Totals
+      5112         26        980         52       2260      35358   Object Totals
          0          0         32          0          0          0   (incl. Generated)
         30          0          2          0          5          0   (incl. Padding)
 
@@ -2185,8 +2185,8 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-     19612        488       1548         52       2584      39080   Grand Totals
-     19612        488       1548         52       2584      39080   ELF Image Totals
+     19612        488       1548         52       2584      39074   Grand Totals
+     19612        488       1548         52       2584      39074   ELF Image Totals
      19612        488       1548         52          0          0   ROM Totals
 
 ==============================================================================

@@ -45,6 +45,7 @@ void I2C1_Config(uint8_t mode){
     I2C1->TRISE = 46 << I2C_TRISE_TRISE_Pos;
 
     I2C1->CR1 |= I2C_CR1_PE;
+	
     I2C1->CR1 &= ~I2C_CR1_POS;
     
     if(mode == 0){

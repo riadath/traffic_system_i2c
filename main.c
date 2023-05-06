@@ -75,6 +75,7 @@ void tim5_delay(uint16_t ms){
 	ms = (uint16_t)2 * ms;
 	TIM5->CNT = 0;
 	while(TIM5->CNT < ms){
+		I2C1->CR1 |= I2C_CR1_ACK;
 		if(TIM2->CNT > report_interval*2){
 			global_time += report_interval/1000;
 			show_traffic_info(global_time);
@@ -171,7 +172,7 @@ void init(void){
 
 void mainLoop(void){
     while(1){
-        I2C1->CR1 |= I2C_CR1_ACK; 
+         
 
         runningTime = 0;
         clearLEDs();

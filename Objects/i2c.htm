@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\i2c.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\i2c.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6190004: Last Updated: Sat May  6 16:01:12 2023
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6190004: Last Updated: Sun May  7 19:29:00 2023
 <BR><P>
 <H3>Maximum Stack Usage =       1104 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -782,9 +782,9 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[62]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_sputc
 <LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_char_common
 </UL>
-<BR>[Called By]<UL><LI><a href="#[104]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;showReportIntervalConfig
+<BR>[Called By]<UL><LI><a href="#[105]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;show_traffic_info
+<LI><a href="#[104]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;showReportIntervalConfig
 <LI><a href="#[103]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;showTrafficConfig
-<LI><a href="#[105]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;show_traffic_info
 </UL>
 
 <P><STRONG><a name="[a6]"></a>sscanf</STRONG> (Thumb, 52 bytes, Stack size 72 bytes, sscanf.o(.text))
@@ -821,8 +821,8 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = strlen
 </UL>
 <BR>[Called By]<UL><LI><a href="#[9e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
-<LI><a href="#[e7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;parseCommand
 <LI><a href="#[29]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;I2C1_EV_IRQHandler
+<LI><a href="#[e7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;parseCommand
 </UL>
 
 <P><STRONG><a name="[14b]"></a>__use_two_region_memory</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, heapauxi.o(.text), UNUSED)
@@ -1178,12 +1178,12 @@ Global Symbols
 <P><STRONG><a name="[d3]"></a>_scanf_really_real</STRONG> (Thumb, 684 bytes, Stack size 120 bytes, scanf_fp.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 340<LI>Call Chain = _scanf_really_real &rArr; _fp_value &rArr; _btod_etento &rArr; _btod_emul &rArr; _e2e
 </UL>
-<BR>[Calls]<UL><LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_is_digit
+<BR>[Calls]<UL><LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_fp_value
+<LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_is_digit
 <LI><a href="#[d6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__mathlib_narrow
 <LI><a href="#[d4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_scanf_infnan
 <LI><a href="#[d5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_scanf_hex_real
 <LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_locale
-<LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_fp_value
 </UL>
 <BR>[Called By]<UL><LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_scanf_real
 </UL>
@@ -1237,16 +1237,16 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[95]"></a>__rt_locale</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, rt_locale_intlibspace.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_fp_dec_real
+<BR><BR>[Called By]<UL><LI><a href="#[d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_scanf_really_real
+<LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_fp_dec_real
 <LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_lib_init_lc_common
 <LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_ctype_table
-<LI><a href="#[d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_scanf_really_real
 </UL>
 
 <P><STRONG><a name="[cf]"></a>__aeabi_errno_addr</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, rt_errno_addr_intlibspace.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[dc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__set_errno
+<BR><BR>[Called By]<UL><LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_fp_value
+<LI><a href="#[dc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__set_errno
 <LI><a href="#[db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__read_errno
-<LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_fp_value
 </UL>
 
 <P><STRONG><a name="[14e]"></a>__errno$intlibspace</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, rt_errno_addr_intlibspace.o(.text), UNUSED)
@@ -1275,8 +1275,8 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_btod_emul
 <LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_btod_ediv
 </UL>
-<BR>[Called By]<UL><LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_fp_digits
-<LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_fp_value
+<BR>[Called By]<UL><LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_fp_value
+<LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_fp_digits
 </UL>
 
 <P><STRONG><a name="[9f]"></a>exit</STRONG> (Thumb, 18 bytes, Stack size 8 bytes, exit.o(.text))
@@ -1312,10 +1312,10 @@ Global Symbols
 <P><STRONG><a name="[dd]"></a>_scanf_really_hex_real</STRONG> (Thumb, 786 bytes, Stack size 80 bytes, scanf_hexfp.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 176<LI>Call Chain = _scanf_really_hex_real &rArr; __support_ldexp &rArr; __hardfp_ldexp &rArr; __mathlib_dbl_underflow &rArr; __aeabi_dmul
 </UL>
-<BR>[Calls]<UL><LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__support_ldexp
+<BR>[Calls]<UL><LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_chval
+<LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__support_ldexp
 <LI><a href="#[d6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__mathlib_narrow
 <LI><a href="#[de]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_llsl
-<LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_chval
 </UL>
 <BR>[Called By]<UL><LI><a href="#[d5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_scanf_hex_real
 </UL>
@@ -1352,8 +1352,8 @@ Global Symbols
 <P><STRONG><a name="[f6]"></a>GPIO_WritePin</STRONG> (Thumb, 80 bytes, Stack size 8 bytes, gpio.o(.text.GPIO_WritePin))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = GPIO_WritePin
 </UL>
-<BR>[Called By]<UL><LI><a href="#[f5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;clearLEDs
-<LI><a href="#[ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mainLoop
+<BR>[Called By]<UL><LI><a href="#[ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mainLoop
+<LI><a href="#[f5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;clearLEDs
 </UL>
 
 <P><STRONG><a name="[ea]"></a>I2C1_Address</STRONG> (Thumb, 106 bytes, Stack size 4 bytes, i2c.o(.text.I2C1_Address))
@@ -1377,9 +1377,9 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[e4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strlen
 <LI><a href="#[e5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strcpy
-<LI><a href="#[e7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;parseCommand
 <LI><a href="#[e6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sendString
 <LI><a href="#[e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;I2C1_ReceiveSlave
+<LI><a href="#[e7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;parseCommand
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f446xx.o(RESET)
 </UL>
@@ -1468,10 +1468,10 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[f3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_SendChar
 </UL>
-<BR>[Called By]<UL><LI><a href="#[104]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;showReportIntervalConfig
-<LI><a href="#[103]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;showTrafficConfig
-<LI><a href="#[e6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sendString
+<BR>[Called By]<UL><LI><a href="#[e6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sendString
 <LI><a href="#[105]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;show_traffic_info
+<LI><a href="#[104]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;showReportIntervalConfig
+<LI><a href="#[103]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;showTrafficConfig
 </UL>
 
 <P><STRONG><a name="[30]"></a>USART2_IRQHandler</STRONG> (Thumb, 40 bytes, Stack size 16 bytes, main.o(.text.USART2_IRQHandler))
@@ -1481,7 +1481,7 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f446xx.o(RESET)
 </UL>
-<P><STRONG><a name="[f5]"></a>clearLEDs</STRONG> (Thumb, 76 bytes, Stack size 16 bytes, traffic_system.o(.text.clearLEDs))
+<P><STRONG><a name="[f5]"></a>clearLEDs</STRONG> (Thumb, 58 bytes, Stack size 16 bytes, main.o(.text.clearLEDs))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = clearLEDs &rArr; GPIO_WritePin
 </UL>
 <BR>[Calls]<UL><LI><a href="#[f6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_WritePin
@@ -1497,7 +1497,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[30]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART2_IRQHandler
 </UL>
 
-<P><STRONG><a name="[f8]"></a>init</STRONG> (Thumb, 108 bytes, Stack size 40 bytes, main.o(.text.init))
+<P><STRONG><a name="[f8]"></a>init</STRONG> (Thumb, 84 bytes, Stack size 40 bytes, main.o(.text.init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 72<LI>Call Chain = init &rArr; sysInit &rArr; SysTick_Config &rArr; __NVIC_SetPriority
 </UL>
 <BR>[Calls]<UL><LI><a href="#[fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_Init
@@ -1515,7 +1515,7 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[f8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init
 </UL>
 
-<P><STRONG><a name="[9e]"></a>main</STRONG> (Thumb, 206 bytes, Stack size 24 bytes, main.o(.text.main))
+<P><STRONG><a name="[9e]"></a>main</STRONG> (Thumb, 208 bytes, Stack size 24 bytes, main.o(.text.main))
 <BR><BR>[Stack]<UL><LI>Max Depth = 1104 + Unknown Stack Size
 <LI>Call Chain = main &rArr; mainLoop &rArr; tim5_delay &rArr; show_traffic_info &rArr; sprintf &rArr; _printf_char_common &rArr; __printf
 </UL>
@@ -1530,19 +1530,19 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry_main
 </UL>
 
-<P><STRONG><a name="[ff]"></a>mainLoop</STRONG> (Thumb, 492 bytes, Stack size 32 bytes, main.o(.text.mainLoop))
+<P><STRONG><a name="[ff]"></a>mainLoop</STRONG> (Thumb, 500 bytes, Stack size 32 bytes, main.o(.text.mainLoop))
 <BR><BR>[Stack]<UL><LI>Max Depth = 1080 + Unknown Stack Size
 <LI>Call Chain = mainLoop &rArr; tim5_delay &rArr; show_traffic_info &rArr; sprintf &rArr; _printf_char_common &rArr; __printf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[100]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rand
+<LI><a href="#[101]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tim5_delay
 <LI><a href="#[f6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_WritePin
 <LI><a href="#[f5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;clearLEDs
-<LI><a href="#[101]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tim5_delay
 </UL>
 <BR>[Called By]<UL><LI><a href="#[9e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[e7]"></a>parseCommand</STRONG> (Thumb, 278 bytes, Stack size 64 bytes, traffic_system.o(.text.parseCommand))
+<P><STRONG><a name="[e7]"></a>parseCommand</STRONG> (Thumb, 278 bytes, Stack size 64 bytes, main.o(.text.parseCommand))
 <BR><BR>[Stack]<UL><LI>Max Depth = 572 + Unknown Stack Size
 <LI>Call Chain = parseCommand &rArr; sscanf &rArr; __vfscanf_char &rArr; __vfscanf &rArr; _scanf_real &rArr; _scanf_really_real &rArr; _fp_value &rArr; _btod_etento &rArr; _btod_emul &rArr; _e2e
 </UL>
@@ -1565,13 +1565,13 @@ Global Symbols
 <LI><a href="#[29]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;I2C1_EV_IRQHandler
 </UL>
 
-<P><STRONG><a name="[102]"></a>setDelayTraffic</STRONG> (Thumb, 188 bytes, Stack size 12 bytes, traffic_system.o(.text.setDelayTraffic))
+<P><STRONG><a name="[102]"></a>setDelayTraffic</STRONG> (Thumb, 188 bytes, Stack size 12 bytes, main.o(.text.setDelayTraffic))
 <BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = setDelayTraffic
 </UL>
 <BR>[Called By]<UL><LI><a href="#[e7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;parseCommand
 </UL>
 
-<P><STRONG><a name="[104]"></a>showReportIntervalConfig</STRONG> (Thumb, 64 bytes, Stack size 64 bytes, traffic_system.o(.text.showReportIntervalConfig))
+<P><STRONG><a name="[104]"></a>showReportIntervalConfig</STRONG> (Thumb, 64 bytes, Stack size 64 bytes, main.o(.text.showReportIntervalConfig))
 <BR><BR>[Stack]<UL><LI>Max Depth = 200 + Unknown Stack Size
 <LI>Call Chain = showReportIntervalConfig &rArr; sprintf &rArr; _printf_char_common &rArr; __printf
 </UL>
@@ -1581,7 +1581,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[e7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;parseCommand
 </UL>
 
-<P><STRONG><a name="[103]"></a>showTrafficConfig</STRONG> (Thumb, 178 bytes, Stack size 72 bytes, traffic_system.o(.text.showTrafficConfig))
+<P><STRONG><a name="[103]"></a>showTrafficConfig</STRONG> (Thumb, 178 bytes, Stack size 72 bytes, main.o(.text.showTrafficConfig))
 <BR><BR>[Stack]<UL><LI>Max Depth = 208 + Unknown Stack Size
 <LI>Call Chain = showTrafficConfig &rArr; sprintf &rArr; _printf_char_common &rArr; __printf
 </UL>
@@ -1591,7 +1591,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[e7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;parseCommand
 </UL>
 
-<P><STRONG><a name="[105]"></a>show_traffic_info</STRONG> (Thumb, 516 bytes, Stack size 896 bytes, traffic_system.o(.text.show_traffic_info))
+<P><STRONG><a name="[105]"></a>show_traffic_info</STRONG> (Thumb, 532 bytes, Stack size 896 bytes, main.o(.text.show_traffic_info))
 <BR><BR>[Stack]<UL><LI>Max Depth = 1032 + Unknown Stack Size
 <LI>Call Chain = show_traffic_info &rArr; sprintf &rArr; _printf_char_common &rArr; __printf
 </UL>
@@ -1610,7 +1610,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[f8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init
 </UL>
 
-<P><STRONG><a name="[101]"></a>tim5_delay</STRONG> (Thumb, 156 bytes, Stack size 16 bytes, main.o(.text.tim5_delay))
+<P><STRONG><a name="[101]"></a>tim5_delay</STRONG> (Thumb, 154 bytes, Stack size 16 bytes, main.o(.text.tim5_delay))
 <BR><BR>[Stack]<UL><LI>Max Depth = 1048 + Unknown Stack Size
 <LI>Call Chain = tim5_delay &rArr; show_traffic_info &rArr; sprintf &rArr; _printf_char_common &rArr; __printf
 </UL>
@@ -1756,8 +1756,8 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[10c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp___mathlib_tofloat
 </UL>
-<BR>[Called By]<UL><LI><a href="#[dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_scanf_really_hex_real
-<LI><a href="#[d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_scanf_really_real
+<BR>[Called By]<UL><LI><a href="#[d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_scanf_really_real
+<LI><a href="#[dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_scanf_really_hex_real
 </UL>
 
 <P><STRONG><a name="[df]"></a>__support_ldexp</STRONG> (Thumb, 20 bytes, Stack size 8 bytes, ldexp.o(i.__support_ldexp))
@@ -1769,8 +1769,8 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[b5]"></a>_is_digit</STRONG> (Thumb, 14 bytes, Stack size 0 bytes, __printf_wp.o(i._is_digit))
-<BR><BR>[Called By]<UL><LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__printf
-<LI><a href="#[d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_scanf_really_real
+<BR><BR>[Called By]<UL><LI><a href="#[d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_scanf_really_real
+<LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__printf
 </UL>
 
 <P><STRONG><a name="[10d]"></a>frexp</STRONG> (Thumb, 118 bytes, Stack size 16 bytes, frexp.o(i.frexp))

@@ -424,11 +424,6 @@
               <FileType>1</FileType>
               <FilePath>.\TRAFFIC_SYSTEM.c</FilePath>
             </File>
-            <File>
-              <FileName>TRAFFIC_SYSTEM.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\TRAFFIC_SYSTEM.h</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>

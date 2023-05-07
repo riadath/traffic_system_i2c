@@ -53,6 +53,7 @@ void I2C1_Config(uint8_t mode){
         I2C1_SetAddress(0);
         
         I2C1->CR2 |= I2C_CR2_ITEVTEN; /*Enable Event Interrupt*/
+		
         I2C1->CR2 |= I2C_CR2_ITERREN; /*Enable Error Interrupt*/
         I2C1->CR2 |= I2C_CR2_ITBUFEN; /*Enable Buffer Interrupt*/
         
@@ -103,11 +104,13 @@ void I2C1_SetAddress(uint8_t address){
 
 void I2C1_Write(uint8_t data){
     TIM3->CNT = 0;
+	
     while(!(I2C1->SR1 & I2C_SR1_TXE)){
         if(TIM3->CNT > 200){
             break;
         }
     }
+	
     I2C1->DR = data;
     
     TIM3->CNT = 0;
@@ -136,6 +139,7 @@ char* I2C1_ReceiveSlave(uint8_t *buffer){
     idx = I2C1->SR1 | I2C1->SR2; /*clear address flag*/
     
     idx = 0;
+	
     while(ch != '@'){
         while(!(I2C1->SR1 & I2C_SR1_RXNE)); /*wait for rxne to set*/
         ch = (uint8_t)I2C1->DR;/*read data from DR register*/

@@ -7,7 +7,7 @@
 #include <string.h>
 
 
-
+static uint32_t timeout_ms = 200;
 
 void I2C1_Config(uint8_t mode){
     //Enable I2C and GPIO
@@ -63,15 +63,16 @@ void I2C1_Config(uint8_t mode){
 }
 
 
-void I2C1_Start(void){
+bool I2C1_Start(void){
     I2C1->CR1 |= I2C_CR1_START;
     TIM3->CNT = 0;
     while(!(I2C1->SR1 & I2C_SR1_SB)){
-        if(TIM3->CNT > 200){
-            sendString("Timeout\n");
-            break;
+        if(TIM3->CNT > timeout_ms){
+            return false;
         }
     }
+	
+	return true;
 }
 
 void I2C1_Stop(void){
@@ -79,18 +80,20 @@ void I2C1_Stop(void){
 }
 
 
-void I2C1_Address(uint8_t address){
+bool I2C1_Address(uint8_t address){
     I2C1->DR = (uint8_t)(address << 1);
     TIM3->CNT = 0;
     
     while(!(I2C1->SR1 & I2C_SR1_ADDR)){
-        if(TIM3->CNT > 200){
-            break;
+        if(TIM3->CNT > timeout_ms){
+            return false;
         }
         
     }
     //Clear ADDR (read SR1 and SR2) 
     address = (uint8_t)(I2C1->SR1 | I2C1->SR2);
+	
+	return true;
 }
 
 
@@ -102,12 +105,12 @@ void I2C1_SetAddress(uint8_t address){
 
 
 
-void I2C1_Write(uint8_t data){
+bool I2C1_Write(uint8_t data){
     TIM3->CNT = 0;
 	
     while(!(I2C1->SR1 & I2C_SR1_TXE)){
-        if(TIM3->CNT > 200){
-            break;
+        if(TIM3->CNT > timeout_ms){
+            return false;
         }
     }
 	
@@ -115,19 +118,25 @@ void I2C1_Write(uint8_t data){
     
     TIM3->CNT = 0;
     while(!(I2C1->SR1 & I2C_SR1_BTF)){
-        if(TIM3->CNT > 200){
-            break;
+        if(TIM3->CNT > timeout_ms){
+            return false;
         }
     }
+	return true;
 }
 
 
 /*read and write functions*/
-void I2C1_TransmitMaster(char *buffer, uint32_t size){
-    I2C1_Start();    /* generate start */
-    I2C1_Address(0); /* send address */
-    for(int idx = 0;idx < (int)size;idx++)I2C1_Write(buffer[idx]);/* send data */
+bool I2C1_TransmitMaster(char *buffer, uint32_t size){
+    if(!I2C1_Start())return false;    /* generate start */
+    if(!I2C1_Address(0))return false; /* send address */
+    for(int idx = 0;idx < (int)size;idx++){
+		if(!I2C1_Write(buffer[idx])){
+			return false;
+		}/* send data */
+	}
     I2C1_Stop();  /* generate stop */
+	return true;
 }
 
 char* I2C1_ReceiveSlave(uint8_t *buffer){

@@ -355,42 +355,28 @@ void mainLoop(void){
 
 int main(void)
 {   
-	uint8_t i = 1;
-    I2C1_Config(i);
-    
-//    gpio_config.Pin = GPIO_PIN_5;
-//    gpio_config.Mode = GPIO_MODE_OUTPUT_PP;
-//    gpio_config.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
-//    
-//    GPIO_Init(GPIOA,&gpio_config);
-    
+	uint8_t setupMode = 0;
+    I2C1_Config(setupMode);
     
     init();
 	
     strcpy(input_buff,"");
     sendString("HELLO I'M IN\n");
     
-    if(i == 0){
+    if(!setupMode){
         sendString("Inside Read Loop\n");
         strcpy(input_buff,"");
         mainLoop();
-//        while(1){   
-//            I2C1->CR1 |= I2C_CR1_ACK;
-//            GPIO_WritePin(GPIOA,5,GPIO_PIN_SET);
-//            ms_delay(500);
-//            GPIO_WritePin(GPIOA,5,GPIO_PIN_RESET);
-//            ms_delay(500);
-//        }
     }
 
     else{
         sendString("Inside Write Loop\n");
-        while(i){
+        while(setupMode){
             if (strlen(input_buff) != 0){          
                 sendString(input_buff);
                 sendString(" << Data to send\n");
                 
-                I2C1_TransmitMaster(input_buff,strlen(input_buff));
+                while(!I2C1_TransmitMaster(input_buff,strlen(input_buff)));
                 strcpy(input_buff, "");
             }
         }
